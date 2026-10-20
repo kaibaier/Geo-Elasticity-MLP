@@ -1,0 +1,22 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# 原始数据、已有的独立仓库和训练产物
+elasticity/
+Geo-FNO/
+artifacts/
+outputs/
+*.pt
+*.pth
+*.ckpt
+
+# 当前目录原有的独立脚本
+single.py
+download_elasticity.py
+count_tensile_plasticity.py
+
+.idea/
