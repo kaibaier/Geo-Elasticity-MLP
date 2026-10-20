@@ -4,7 +4,6 @@
 
 ## 数据
 
-原始文件位于项目根目录下不纳入 Git 的 `elasticity/Meshes/`，脚本直接读取，不会复制或移动：
 
 | 文件 | 形状 | 含义 |
 | --- | --- | --- |
@@ -22,7 +21,6 @@
 适用 WSL2、Python 3.12 和 NVIDIA RTX 5060。使用 Windows 主机提供给 WSL2 的驱动，不需在 WSL2 安装 Linux NVIDIA 驱动。PyTorch 2.13.0 官方 CUDA 13.0 构建适用于 Blackwell，具体版本和命令见 [PyTorch 安装页面](https://pytorch.org/get-started/previous-versions/) 与 [PyTorch 2.13 发布说明](https://pytorch.org/blog/pytorch-2-13-release-blog/)。
 
 ```bash
-cd ~/pinn
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
 .venv/bin/python check_env.py
@@ -31,7 +29,6 @@ python3 -m venv .venv
 以后每次新开 WSL2 终端，可进入项目并激活已有环境：
 
 ```bash
-cd ~/pinn
 source .venv/bin/activate
 which python                 # 应显示 /home/zsn/pinn/.venv/bin/python
 python check_env.py
@@ -68,17 +65,3 @@ cd ~/pinn
 - `visualize.py`：至少三个测试样本的点云应力图。
 - `check_env.py`：环境、CUDA 和实际 GPU 矩阵乘法检查。
 - `requirements.txt`：项目依赖。
-
-## Git 提交建议
-
-仓库已在 `~/pinn` 初始化；由项目使用者执行 `git add` 与 `git commit`，不推送。原始数据、已有的 Geo-FNO 独立仓库、虚拟环境、模型权重与运行结果由 `.gitignore` 排除。
-
-```bash
-git status --short
-git add .gitignore requirements.txt config.py data.py model.py check_env.py README.md
-git commit -m "Set up reproducible elasticity dataset and MLP"
-git add train.py evaluate.py visualize.py
-git commit -m "Add supervised training, evaluation and visualizations"
-```
-
-建议提交前查看 `git diff --cached --stat`，确认没有加入原始数据或大文件。README 里的冒烟测试结果可在本人运行后补入另一次提交。
